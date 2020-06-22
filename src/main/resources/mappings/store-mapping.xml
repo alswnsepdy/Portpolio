@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StoreDAO">
+	<select id="getStoreList" resultType="store">
+		SELECT * FROM store order by sseq
+	</select>
+
+	<select id="getStoreProduct" resultType="store">
+		SELECT * FROM store where sseq = #{sseq}
+	</select>
+	
+	<select id="getStoreProductByKind" resultType="store">
+		SELECT * FROM store where skind = #{skind}
+	</select>
+	
+	
+	<select id="searchedStoreList" parameterType="String" resultType="store">
+		SELECT *
+		FROM store WHERE sname like '%'||#{sname}||'%' ORDER BY sseq desc
+	</select>
+	
+	<insert id="insertStore">
+		INSERT INTO store (sseq, skind, sname, sprice, scontent, simage)
+		VALUES (product_seq.nextval, #{skind}, #{sname}, #{sprice}, #{scontent}, #{simage})
+	</insert>
+	
+	<!-- 상품삭제하기 -->
+	<delete id="deleteStore">
+		DELETE FROM store where sseq=#{sseq}
+	</delete>
+	
+
+</mapper>
