@@ -3,20 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../header.jsp"%>
-<style>
-body {
-	background: #f2f2f2;
-}
-th, td{
-	border: 1px solid skyblue;
-}
-</style>
 <body>
 	<form name="elfrm">
 		<table id="enterList" style="text-align: center; width:100%;">
 			<tr>
-				<th>상품 번호</th>
-				<th>상품명</th>
+				<th></th>
+				<th>상품 정보</th>
 				<th>사이즈</th>
 				<th>가격</th>
 				<th>응모한날짜</th>
@@ -26,12 +18,12 @@ th, td{
 				<tr>
 				<td>
 				<a href="drop_page_detail?pseq=${enterVO.pseq}">
-				${enterVO.pseq }
+				<img src="images/${enterVO.image }" width="100px" height="120px;">
+				
 				</a>
 				</td>
 				<td>
-				<a href="drop_page_detail?pseq=${enterVO.pseq }">
-				${enterVO.pname }				</a>
+				<a href="drop_page_detail?pseq=${enterVO.pseq}">${enterVO.pname }</a>
 				</td>
 				<td>
 				${enterVO.psize }
@@ -47,10 +39,10 @@ th, td{
 					응모중
 					</c:if>
 					<c:if test="${enterVO.condition == 2}">
-					당첨
+					<label style="color:blue;">당첨</label>
 					</c:if>
 					<c:if test="${enterVO.condition == 3}">
-					미당첨
+					<label style="color:red;">미당첨</label>
 					</c:if>
 				</td>
 				</c:forEach>

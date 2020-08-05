@@ -20,4 +20,15 @@ public class EnterDAO {
 	public List<EnterVO> getEnterProductById(String id) {
 		return mybatis.selectList("EnterDAO.getEnterProductById", id);
 	}
+	
+	public List<EnterVO> getEnterList(EnterVO enterVO){
+		return mybatis.selectList("EnterDAO.getEnterList", enterVO);
+	}
+	
+	public void updateEnterCondition(EnterVO enterVO) {
+		mybatis.update("EnterDAO.updateEnterCondition", enterVO);
+	}
+	public void updateEnterConditionFail(EnterVO enterVO) {
+		mybatis.update("EnterDAO.updateEnterCondition", enterVO);
+	}
 }

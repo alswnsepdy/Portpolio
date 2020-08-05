@@ -18,18 +18,33 @@
 	
 	<select id="searchedProductList" parameterType="String" resultType="product">
 		SELECT *
-		FROM product WHERE pname like '%'||#{pname}||'%' ORDER BY pseq desc
+		FROM product WHERE pname like '%'||#{pname}||'%' and droppd='y' ORDER BY pseq desc
 	</select>
 	
 	<insert id="insertProduct">
-		INSERT INTO product (pseq, kind, pname, price, content, image, startdate, enddate)
-		VALUES (product_seq.nextval, #{kind}, #{pname}, #{price}, #{content}, #{image}, #{startdate}, #{enddate})
+		INSERT INTO product (pseq, pname, price, content, image, startdate, enddate)
+		VALUES (product_seq.nextval, #{pname}, #{price}, #{content}, #{image}, #{startdate}, #{enddate})
 	</insert>
 	
 	<!-- 상품삭제하기 -->
 	<delete id="deleteProduct">
 		DELETE FROM product where pseq=#{pseq}
 	</delete>
+	<!-- 상품 업데이트 -->
+	
+	<update id="updateProduct">																				
+		UPDATE product SET price=#{price}, content=#{content}, startdate = #{startdate}, enddate=#{enddate} where pseq=#{pseq}
+	</update>
+	
+	<!-- 응모 상품 종료 처리 -->
+	<update id="endProduct">
+		UPDATE product SET droppd='n' where pseq=#{pseq}
+	</update>
+	<!-- 응모 종료 상품 가져오기 -->
+	
+	<select id="getEndProductList" parameterType="String" resultType="product">
+		SELECT * FROM product where droppd='n'
+	</select>
 	
 
 </mapper>

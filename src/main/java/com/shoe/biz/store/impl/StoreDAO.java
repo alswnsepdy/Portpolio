@@ -21,16 +21,10 @@ public class StoreDAO {
 		
 	}
 	
-	public List<StoreVO> getStoreList(){
+	public List<StoreVO> getStoreList(StoreVO storeVO){
 		System.out.println("==>Mybatis로 getStoreList() 기능처리");
 		
 		return mybatis.selectList("StoreDAO.getStoreList");
-	}
-	
-	public List<StoreVO> searchStoreList(StoreVO storeVO){
-		System.out.println("==>Mybatis로 searchStoreList() 기능처리");
-		
-		return mybatis.selectList("StoreDAO.searchStoreList", storeVO);
 	}
 	
 	public void insertStore(StoreVO storeVO) {
@@ -49,5 +43,19 @@ public class StoreDAO {
 		System.out.println("==>Mybatis로 getStoreProductByKind() 기능처리");
 		
 		return mybatis.selectList("StoreDAO.getStoreProductByKind", skind);
+	}
+	
+	public List<StoreVO> searchedStoreList(StoreVO storeVO){
+		System.out.println("store검색 기능");
+		
+		return mybatis.selectList("StoreDAO.searchedStoreList", storeVO);
+	}
+	
+	public void updateStoreProduct(StoreVO storeVO) {
+		mybatis.update("StoreDAO.updateStoreProduct", storeVO);
+	}
+	
+	public void deleteStoreProduct(int sseq) {
+		mybatis.update("StoreDAO.deleteStoreProduct", sseq);
 	}
 }

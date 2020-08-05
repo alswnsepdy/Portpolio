@@ -48,4 +48,20 @@ public class ProductDAO {
 		
 		mybatis.delete("ProductDAO.deleteProduct", productVO);
 		}
+	public void updateProduct(ProductVO productVO) {
+		System.out.println("=> mybatis로 updateProduct() 기능처리");
+		
+		mybatis.update("ProductDAO.updateProduct", productVO);
+	}
+	
+	public void endProduct(int pseq) {
+		System.out.println("=> mybatis로 endProduct() 기능처리");
+		
+		mybatis.update("ProductDAO.endProduct", pseq);
+	}
+	
+	public List<ProductVO> getEndProductList(ProductVO productVO){
+		System.out.println("=>mybatis로 getEndProductList() 기능처리");
+		return mybatis.selectList("ProductDAO.getEndProductList", productVO);
+	}
 }

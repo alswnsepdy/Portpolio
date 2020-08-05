@@ -16,4 +16,10 @@ public interface ProductService {
 	public void insertProduct(ProductVO productVO);
 	
 	public void deleteProduct(ProductVO productVO);
+	
+	public void updateProduct(ProductVO productVO);
+	
+	public void endProduct(int pseq);
+	
+	public List<ProductVO> getEndProductList(ProductVO productVO);
 }

@@ -20,5 +20,17 @@ public class EnterServiceImpl implements EnterService {
 	public List<EnterVO> getEnterProductById(String id) {
 		return enterDAO.getEnterProductById(id);
 	}
+	@Override
+	public List<EnterVO> getEnterList(EnterVO enterVO) {
+		return enterDAO.getEnterList(enterVO);
+	}
+	@Override
+	public void updateEnterCondition(EnterVO enterVO) {
+		enterDAO.updateEnterCondition(enterVO);
+	}
+	@Override
+	public void updateEnterConditionFail(EnterVO enterVO) {
+		enterDAO.updateEnterConditionFail(enterVO);
+	}
 
 }

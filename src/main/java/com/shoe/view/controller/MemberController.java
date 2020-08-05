@@ -186,6 +186,7 @@ public class MemberController {
 		memberVO = (MemberVO) session.getAttribute("loginUser");
 		
 		if(memberVO == null) {
+			model.addAttribute("message", "세션이 만료되어 로그인페이지로 이동합니다.");
 			return "redirect:index";
 		} else {
 		MemberVO member = memberService.getMember(memberVO);
@@ -225,7 +226,7 @@ public class MemberController {
 		vo.setAddress(addr1);
 		vo.setPwd(pwd);
 		vo.setEmail(email);
-		System.out.println("pp: "+pwd);
+		
 		memberService.updateMember(vo);
 
 		return "redirect:my_info";

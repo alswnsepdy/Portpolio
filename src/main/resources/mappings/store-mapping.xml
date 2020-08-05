@@ -4,7 +4,7 @@
 
 <mapper namespace="StoreDAO">
 	<select id="getStoreList" resultType="store">
-		SELECT * FROM store order by sseq
+		SELECT * FROM store_pro_view order by sseq
 	</select>
 
 	<select id="getStoreProduct" resultType="store">
@@ -12,13 +12,7 @@
 	</select>
 	
 	<select id="getStoreProductByKind" resultType="store">
-		SELECT * FROM store where skind = #{skind}
-	</select>
-	
-	
-	<select id="searchedStoreList" parameterType="String" resultType="store">
-		SELECT *
-		FROM store WHERE sname like '%'||#{sname}||'%' ORDER BY sseq desc
+		SELECT * FROM store_pro_view where skind = #{skind}
 	</select>
 	
 	<insert id="insertStore">
@@ -26,10 +20,25 @@
 		VALUES (product_seq.nextval, #{skind}, #{sname}, #{sprice}, #{scontent}, #{simage})
 	</insert>
 	
-	<!-- 상품삭제하기 -->
+	
 	<delete id="deleteStore">
 		DELETE FROM store where sseq=#{sseq}
 	</delete>
 	
+	<!-- 상품삭제하기 -->
+	<update id="deleteStoreProduct">
+			UPDATE store SET sdelete='n' where sseq=#{sseq}
+	</update>
+	
+	<!-- Store 상품 검색 -->
+	<select id="searchedStoreList" parameterType="String" resultType="store">
+		SELECT *
+		FROM store WHERE sname like '%'||#{sname}||'%' ORDER BY sseq desc
+	</select>
+	<!-- 상품 업데이트 -->
+	
+	<update id="updateStoreProduct">																				
+		UPDATE store SET sprice=#{sprice}, scontent=#{scontent} where sseq=#{sseq}
+	</update>
 
 </mapper>

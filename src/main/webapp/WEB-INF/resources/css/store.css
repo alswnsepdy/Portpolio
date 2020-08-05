@@ -1,3 +1,7 @@
+.media {
+	width: 100%;
+	margin: 0 auto;
+}
 #product {
 	text-align: center;
 	display: inline-block;

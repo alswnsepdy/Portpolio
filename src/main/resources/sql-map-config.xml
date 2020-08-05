@@ -10,6 +10,7 @@
 		<typeAlias type="com.shoe.biz.address.AddressVO" alias="address"></typeAlias>
 		<typeAlias type="com.shoe.biz.enter.EnterVO" alias="enter"></typeAlias>
 		<typeAlias type="com.shoe.biz.store.StoreVO" alias="store"></typeAlias>
+		<typeAlias type="com.shoe.biz.buy.BuyVO" alias="buy"></typeAlias>
 		
 	</typeAliases>
 
@@ -18,5 +19,6 @@
 		<mapper resource="mappings/product-mapping.xml" />
 		<mapper resource="mappings/enter-mapping.xml" />
 		<mapper resource="mappings/store-mapping.xml" />
+		<mapper resource="mappings/buy-mapping.xml" />
 	</mappers>
 </configuration>

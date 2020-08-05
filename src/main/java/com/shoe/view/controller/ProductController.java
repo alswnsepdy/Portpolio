@@ -1,7 +1,5 @@
 package com.shoe.view.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,12 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.shoe.biz.member.MemberService;
 import com.shoe.biz.member.MemberVO;
 import com.shoe.biz.product.ProductService;
 import com.shoe.biz.product.ProductVO;
+import com.shoe.biz.store.StoreService;
+import com.shoe.biz.store.StoreVO;
 
 @Controller
 public class ProductController {
@@ -28,14 +27,26 @@ public class ProductController {
 	@Autowired
 	MemberService memberService;
 	
+	@Autowired
+	StoreService storeService;
+	
 	// 검색 기능 구현
 	@RequestMapping(value = "product_search_list")
-	String getProductSearchList(Model model, ProductVO productVO,
-			@RequestParam(value = "key", defaultValue = "") String key) {
+	String getProductSearchList(Model model, ProductVO productVO,StoreVO storeVO,
+			@RequestParam(value = "key", defaultValue = "") String key, @RequestParam(value="searchKind") String searchKind) {
 		System.out.println(key);
+		if(searchKind.equals("1")) {
 		productVO.setPname(key);
 		List<ProductVO> searchList = productService.searchedProductList(productVO);
 		model.addAttribute("searchList", searchList);
+		model.addAttribute("kind", 1);
+		}else if(searchKind.equals("2")) {
+			storeVO.setSname(key);
+			List<StoreVO> searchList = storeService.searchedStoreList(storeVO);
+			model.addAttribute("searchList", searchList);
+			model.addAttribute("kind", 2);
+		}
+		
 		model.addAttribute("key", key);
 		return "page/searchList";
 	}
@@ -72,44 +83,14 @@ public class ProductController {
 		return "enter/productEnter";
 	}
 	
-	//상품 등록 화면 출력
-	@RequestMapping(value="plus_product_form")
-	String addProductView(Model model) {
-		String kindList[] = {"DROP","RESTOCK"};
-		model.addAttribute("kindList", kindList);
-		return "page/addProduct";
-	}
-
-	//상품 등록후 파일 업로드 처리
-	@RequestMapping(value="plus_product_action", method = RequestMethod.POST)
-	public String plusProductAction(@RequestParam(value="images", required = false) MultipartFile uploadFile,ProductVO productVO, HttpSession session) throws IOException{
+	//종료된 drop 상품 목록
+	@RequestMapping(value="end_product")
+	String getEndProductList(Model model, ProductVO productVO) {
+		List<ProductVO> endProduct = productService.getEndProductList(productVO);
 		
-		//MultipartFile uploadFile = productVO.getUploadFile();
-		String fileName = "";
-		if(!uploadFile.isEmpty()) {
-			String root_path = session.getServletContext().getRealPath("WEB-INF/resources/images/");
-			fileName = uploadFile.getOriginalFilename();
-			try {
-				File file = new File(root_path + fileName);
-				uploadFile.transferTo(file);
-				
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
-		productVO.setImage(fileName);
-		productService.insertProduct(productVO);
+		model.addAttribute("endProduct", endProduct);
 		
-		return "redirect:drop_page";
+		return "page/endDropProduct";
 	}
 	
-	//상품 삭제 기능 
-	@RequestMapping(value="delete_product")
-	public String deleteProductAction(ProductVO productVO) {
-		productService.deleteProduct(productVO);
-		return "redirect:drop_page";
-	}
 }

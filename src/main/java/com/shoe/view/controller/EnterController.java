@@ -26,7 +26,7 @@ public class EnterController {
 	@Autowired
 	ProductService productService;
 
-	// 응모 내역 불러오기
+	// 응모 하기
 	@RequestMapping(value = "enter_product")
 	public String enterProduct(EnterVO enterVO, ProductVO productVO, HttpSession session, Model model, @RequestParam(value="psize") int psize) {
 		System.out.println("====>응모 내역 불러오기");
@@ -40,6 +40,8 @@ public class EnterController {
 		enterVO.setPname(product.getPname());
 		enterVO.setPrice(product.getPrice());
 		enterVO.setPseq(product.getPseq());
+		enterVO.setDroppd(product.getDroppd());
+		enterVO.setImage(product.getImage());
 		
 		enterService.enterProduct(enterVO);
 		System.out.println(enterVO);

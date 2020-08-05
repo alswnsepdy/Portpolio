@@ -1,29 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<%@ include file="../header.jsp" %>
+	<script type="text/javascript" src="page/addProduct.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript" src="page/product.js"></script>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-</head>
-<body>
+
+<script>
+//달력 표시
+$(function() {
+	$("#datepicker").datepicker();
+});
+//달력표시 2
+$(function() {
+	$("#enddatepicker").datepicker();
+});
+</script>
+	
+
 	<form name="afrm" method="post" enctype="multipart/form-data">
 		<table>
-			<tr>
-				<th>상품 분류</th>
-				<td colspan="5"><select name="kind">
-						<c:forEach items="${kindList }" var="kind" varStatus="status">
-							<option value="${status.count }">${kind }</option>
-						</c:forEach>
-				</select></td>
-			</tr>
 			<tr>
 				<th>상품명</th>
 				<td width="343" colspan="5"><input type="text" name="pname"
@@ -52,6 +51,6 @@
 			</tr>
 		</table>
 		<input class="btn btn-primary" type="button" value="등록" onclick="go_save()">
-		<input class="btn btn-primary" type="button" value="취소" onclick="go_mov()">
+		<input class="btn btn-primary" type="button" value="취소" onclick="return cancelAdd()">
 	</form>
 	<%@ include file="../footer.jsp"%>

@@ -7,14 +7,13 @@ public class EnterVO {
 	private String id;
 	private String name;
 	private int condition;
-
-
-
+	private String image;
 	private String pname;
 	private int price;
 	private int pseq;
 	private int psize;
 	private Date enterdate;
+	private String droppd;
 
 	public int getEseq() {
 		return eseq;
@@ -22,6 +21,16 @@ public class EnterVO {
 
 	public void setEseq(int eseq) {
 		this.eseq = eseq;
+	}
+
+	
+	
+	public String getDroppd() {
+		return droppd;
+	}
+
+	public void setDroppd(String droppd) {
+		this.droppd = droppd;
 	}
 
 	public String getId() {
@@ -53,6 +62,14 @@ public class EnterVO {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public int getCondition() {
@@ -91,9 +108,14 @@ public class EnterVO {
 
 	@Override
 	public String toString() {
-		return "EnterVO [eseq=" + eseq + ", id=" + id + ", name=" + name + ", condition=" + condition + ", pname="
-				+ pname + ", price=" + price + ", pseq=" + pseq + ", psize=" + psize + ", enterdate=" + enterdate + "]";
+		return "EnterVO [eseq=" + eseq + ", id=" + id + ", name=" + name + ", condition=" + condition + ", image="
+				+ image + ", pname=" + pname + ", price=" + price + ", pseq=" + pseq + ", psize=" + psize
+				+ ", enterdate=" + enterdate + ", droppd=" + droppd + "]";
 	}
+
+	
+
+	
 	
 	
 	

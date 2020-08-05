@@ -19,14 +19,10 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<StoreVO> getStoreList() {
-		return storeDAO.getStoreList();
+	public List<StoreVO> getStoreList(StoreVO storeVO) {
+		return storeDAO.getStoreList(storeVO);
 	}
 
-	@Override
-	public List<StoreVO> searchStoreList(StoreVO storeVO) {
-		return storeDAO.searchStoreList(storeVO);
-	}
 
 	@Override
 	public void insertStore(StoreVO storeVO) {
@@ -41,6 +37,21 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public List<StoreVO> getStoreProductByKind(String skind) {
 		return storeDAO.getStoreProductByKind(skind);
+	}
+
+	@Override
+	public List<StoreVO> searchedStoreList(StoreVO storeVO) {
+		return storeDAO.searchedStoreList(storeVO);
+	}
+
+	@Override
+	public void updateStoreProduct(StoreVO storeVO) {
+		storeDAO.updateStoreProduct(storeVO);
+	}
+
+	@Override
+	public void deleteStoreProduct(int sseq) {
+		storeDAO.deleteStoreProduct(sseq);
 	}
 
 }

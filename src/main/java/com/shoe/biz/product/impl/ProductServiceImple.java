@@ -43,4 +43,19 @@ public class ProductServiceImple implements ProductService{
 		productDAO.deleteProduct(productVO);
 	}
 
+	@Override
+	public void updateProduct(ProductVO productVO) {
+		productDAO.updateProduct(productVO);
+	}
+
+	@Override
+	public void endProduct(int pseq) {
+		productDAO.endProduct(pseq);
+	}
+
+	@Override
+	public List<ProductVO> getEndProductList(ProductVO productVO) {
+		return productDAO.getEndProductList(productVO);
+	}
+
 }

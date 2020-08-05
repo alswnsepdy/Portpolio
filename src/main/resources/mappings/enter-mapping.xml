@@ -4,10 +4,22 @@
 
 <mapper namespace="EnterDAO">
 	<insert id="enterProduct">
-		INSERT INTO enter (eseq, id, name,pname, pseq, psize, price) VALUES(eseq_seq.nextval, #{id}, #{name},#{pname}, #{pseq}, #{psize}, #{price})
+		INSERT INTO enter (eseq, id, name,pname, pseq, psize, price, image, droppd) VALUES(eseq_seq.nextval, #{id}, #{name},#{pname}, #{pseq}, #{psize}, #{price}, #{image}, #{droppd})
 	</insert>
 
 	<select id="getEnterProductById" resultType="enter">
 		SELECT * FROM enter WHERE id=#{id} ORDER BY eseq 
 	</select>
+	
+	<select id="getEnterList" resultType="enter">
+		SELECT * FROM enter where droppd='y' and condition= 1
+	</select>
+	
+	<update id="updateEnterCondition">
+		UPDATE enter SET condition = 2 where eseq =#{eseq}
+	</update>
+	
+	<update id="updateEnterConditionFail">
+		UPDATE enter SET condition = 3 where eseq =#{eseq}
+	</update>
 </mapper>
